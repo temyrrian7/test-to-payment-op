@@ -1,0 +1,11 @@
+<div class="book-details">
+  <h2>{{ book.title }}</h2>
+  <p><strong>Author:</strong> {{ book.author }}</p>
+  <p><strong>Year:</strong> {{ book.year }}</p>
+  <p><strong>Description:</strong> {{ book.description }}</p>
+  <img *ngIf="book.coverImageUrl" [src]="book.coverImageUrl" alt="Book Cover" />
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="close()">Close</button>
+  </div>
+</div>
