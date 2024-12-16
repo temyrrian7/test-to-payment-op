@@ -22,6 +22,8 @@ import { BookDetailsComponent } from './book-details/book-details.component'
 import { BookFormComponent } from './book-form/book-form.component'
 import { SearchPipe } from '../../pipes /search.pipe'
 import { MatTooltip } from '@angular/material/tooltip'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { animate, style, transition, trigger } from '@angular/animations'
 
 @Component({
   selector: 'app-book-list',
@@ -55,6 +57,17 @@ import { MatTooltip } from '@angular/material/tooltip'
         placeholderResolution: 40
       }
     },
+  ],
+  animations: [
+    trigger('listAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' })),
+      ]),
+    ]),
   ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'

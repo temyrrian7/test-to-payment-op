@@ -8,7 +8,7 @@
     <button mat-raised-button color="primary" (click)="addNewBook()">Add Book</button>
   </div>
 
-  <div *ngFor="let book of books$ | async | search:searchQuery" class="book-item">
+  <div *ngFor="let book of books$ | async | search:searchQuery" class="book-item" @listAnimation>
     <mat-card class="flex m-8 p-8 gap-6">
       <mat-card-header>
         <mat-card-title-group>
