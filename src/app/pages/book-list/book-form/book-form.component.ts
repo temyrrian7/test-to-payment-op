@@ -18,20 +18,16 @@ import type { Book, BookForm } from '../../../models/book.model'
 export class BookFormComponent implements OnInit {
   bookForm: FormGroup
 
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private bookService: BookService,
-    private dialogRef: MatDialogRef<BookFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public book: Book
-  ) {
+  constructor(private fb: NonNullableFormBuilder, private bookService: BookService, private dialogRef: MatDialogRef<BookFormComponent>, @Inject(MAT_DIALOG_DATA) public book: Book) {
     this.bookForm = this.fb.group<BookForm>({
       title: this.fb.control('', Validators.required),
       author: this.fb.control('', Validators.required),
       year: this.fb.control(0, Validators.required),
       description: this.fb.control('', Validators.required),
-      coverImageUrl: this.fb.control('')
-    });
+      coverImageUrl: this.fb.control(''),
+    })
   }
+
   ngOnInit() {
     if (this.book) {
       this.bookForm.patchValue(this.book)
