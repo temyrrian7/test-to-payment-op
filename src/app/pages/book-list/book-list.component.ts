@@ -26,6 +26,7 @@ import { SearchPipe } from '../../pipes /search.pipe'
 import { MatTooltip } from '@angular/material/tooltip'
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Book } from '../../models/book.model'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-book-list',
@@ -45,26 +46,26 @@ import { Book } from '../../models/book.model'
   styleUrl: './book-list.component.scss',
 })
 export class BookListComponent {
-  books$ = this.bookService.books$
+  books$: Observable<Book[]> = this.bookService.books$
   searchQuery = ''
 
   constructor(private bookService: BookService, private dialog: MatDialog) {
   }
 
-  addNewBook() {
+  addNewBook(): void {
     this.dialog.open(BookFormComponent, { width: '400px' })
   }
 
-  editBook($event: MouseEvent, book: Book) {
+  editBook($event: MouseEvent, book: Book): void {
     $event.stopPropagation()
     this.dialog.open(BookFormComponent, { data: book, width: '400px' })
   }
 
-  viewBookDetails(book: Book) {
+  viewBookDetails(book: Book): void {
     this.dialog.open(BookDetailsComponent, { data: book, width: '400px' })
   }
 
-  deleteBook($event: MouseEvent, id: number) {
+  deleteBook($event: MouseEvent, id: number): void {
     $event.stopPropagation()
     this.bookService.deleteBook(id)
   }

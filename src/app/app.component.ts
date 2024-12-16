@@ -9,11 +9,4 @@ import { RouterOutlet } from '@angular/router'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  public readonly user = {
-    name: 'Jon',
-  }
-
-  getName() {
-    return this.user.name
-  }
 }

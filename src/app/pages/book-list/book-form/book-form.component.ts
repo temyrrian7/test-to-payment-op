@@ -28,13 +28,13 @@ export class BookFormComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.book) {
       this.bookForm.patchValue(this.book)
     }
   }
 
-  submitForm() {
+  submitForm(): void {
     if (this.bookForm.valid) {
       if (this.book) {
         this.bookService.updateBook({ ...this.bookForm.value, ...{ id: this.book.id } })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { Book } from '../models/book.model'
 
 @Injectable({ providedIn: 'root' })
@@ -25,26 +25,40 @@ export class BookService {
     year: 1922,
     description: 'Storm of Steel begins with Jünger, as a private, entering the line with the 73rd Hanoverian Regiment in Champagne. His first taste of combat came at Les Éparges in April 1915 where he was first wounded by a piece of shrapnel piercing his thigh.\n' + '\n' + 'After recuperating, he took an officer\'s course and achieved the rank of Leutnant. He rejoined his regiment on the Arras sector. In 1916, with the Battle of the Somme underway, Jünger\'s regiment moved to Combles in August for the defence of the village of Guillemont. Here Jünger was wounded again, and absent shortly before the final British assault which captured the village — his platoon was annihilated. In 1917 Jünger saw action during the Battle of Arras in April, the Third Battle of Ypres in July and October, and the German counter-attack during the Battle of Cambrai in November. Jünger led a company of assault troops during the final German spring offensive, 21 March 1918 when he was wounded again. On 23 August he suffered his most severe wound when he was shot through the chest.',
     coverImageUrl: 'https://nashformat.ua/files/products/800883.270x390.jpg?241216073901',
-  }]
+  }, {
+    id: 4,
+    title: 'Nineteen Eighty Four',
+    author: 'George Orwell',
+    year: 1949,
+    description: 'Set in a dystopian future, the novel presents a society under the total control of a totalitarian regime, led by the omnipresent Big Brother. The protagonist, a low-ranking member of \'the Party\', begins to question the regime and falls in love with a woman, an act of rebellion in a world where independent thought, dissent, and love are prohibited. The novel explores themes of surveillance, censorship, and the manipulation of truth.',
+    coverImageUrl: 'https://images.thegreatestbooks.org/oka7y4u1r23osldhnx42q9lvxtpz',
+  },
+    {
+      id: 5,
+      title: 'Wind, Sand and Stars',
+      author: 'Antoine de Saint-Exupéry',
+      year: 1939,
+      description: '\n' +
+        'This book is a memoir by an early twentieth-century French aviator, sharing his experiences as a pioneer of aviation in the 1920s and 1930s, particularly in remote places such as the Sahara Desert and the Andes Mountains. The author reflects on the nature of adventure, the allure of the unknown, and the profound connection between human beings and the natural world. The book is also notable for its philosophical musings on the nature of life and death, solitude and solidarity, and the human condition.',
+      coverImageUrl: 'https://images.thegreatestbooks.org/x8jzv6kxc8xbwn4odi2my7cu6w0w',
+    },
+
+  ]
 
   private booksSubject = new BehaviorSubject<Book[]>(this.books)
-  books$ = this.booksSubject.asObservable()
+  books$: Observable<Book[]> = this.booksSubject.asObservable()
 
-  addBook(book: Book) {
+  addBook(book: Book): void {
     this.books.push({ ...book, id: Date.now() })
     this.booksSubject.next(this.books)
   }
 
-  updateBook(updatedBook: Book) {
-    console.log(updatedBook)
-
+  updateBook(updatedBook: Book): void {
     this.books = this.books.map((book) => book.id === updatedBook.id ? updatedBook : book)
-
-    console.log(this.books)
     this.booksSubject.next(this.books)
   }
 
-  deleteBook(id: number) {
+  deleteBook(id: number): void {
     this.books = this.books.filter((book) => book.id !== id)
     this.booksSubject.next(this.books)
   }
