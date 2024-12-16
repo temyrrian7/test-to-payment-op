@@ -23,9 +23,7 @@ export class BookFormComponent implements OnInit {
     private bookService: BookService,
     private dialogRef: MatDialogRef<BookFormComponent>,
     @Inject(MAT_DIALOG_DATA) public book: Book
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.bookForm = this.fb.group<BookForm>({
       title: this.fb.control('', Validators.required),
       author: this.fb.control('', Validators.required),
@@ -33,7 +31,8 @@ export class BookFormComponent implements OnInit {
       description: this.fb.control('', Validators.required),
       coverImageUrl: this.fb.control('')
     });
-
+  }
+  ngOnInit() {
     if (this.book) {
       this.bookForm.patchValue(this.book)
     }

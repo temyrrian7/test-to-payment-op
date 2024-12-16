@@ -10,7 +10,9 @@ import {
   MatCardContent,
   MatCardHeader,
   MatCardSmImage,
-  MatCardSubtitle, MatCardTitle, MatCardTitleGroup,
+  MatCardSubtitle,
+  MatCardTitle,
+  MatCardTitleGroup,
 } from '@angular/material/card'
 import { MatIcon } from '@angular/material/icon'
 import { MatTooltip } from '@angular/material/tooltip'
@@ -18,32 +20,15 @@ import { MatTooltip } from '@angular/material/tooltip'
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [
-    NgIf,
-    MatButton,
-    NgOptimizedImage,
-    MatCard,
-    MatCardActions,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSmImage,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatCardTitleGroup,
-    MatIcon,
-    MatIconButton,
-    MatTooltip,
-  ],
+  imports: [NgIf, MatButton, NgOptimizedImage, MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardSmImage, MatCardSubtitle, MatCardTitle, MatCardTitleGroup, MatIcon, MatIconButton, MatTooltip],
   templateUrl: './book-details.component.html',
-  styleUrl: './book-details.component.scss'
+  styleUrl: './book-details.component.scss',
 })
 export class BookDetailsComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public book: Book,
-    private dialogRef: MatDialogRef<BookDetailsComponent>
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public book: Book, private dialogRef: MatDialogRef<BookDetailsComponent>) {
+  }
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 }
