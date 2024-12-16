@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { BookService } from '../../../services /book.service'
 import { MatDialogRef } from '@angular/material/dialog'
-import { MatFormField } from '@angular/material/form-field'
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field'
 import { MatInput } from '@angular/material/input'
 import { MatButton } from '@angular/material/button'
+import { NgIf } from '@angular/common'
 
 @Component({
   selector: 'app-book-form',
@@ -14,6 +15,9 @@ import { MatButton } from '@angular/material/button'
     ReactiveFormsModule,
     MatInput,
     MatButton,
+    MatLabel,
+    NgIf,
+    MatError,
   ],
   templateUrl: './book-form.component.html',
   styleUrl: './book-form.component.scss'

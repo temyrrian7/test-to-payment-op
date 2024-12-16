@@ -1,16 +1,38 @@
-<div class="book-list">
-  <mat-toolbar color="primary">Book List</mat-toolbar>
-  <mat-form-field>
-    <input matInput placeholder="Search by title or author" [(ngModel)]="searchQuery" />
-  </mat-form-field>
+<div class="book-list mb-8">
+  <mat-toolbar class="pl-8" color="primary">Book List</mat-toolbar>
+  <div class="mt-8 ml-8 flex gap-10 items-baseline">
+    <mat-form-field>
+      <input matInput placeholder="Search by title or author" [(ngModel)]="searchQuery" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="addNewBook()">Add Book</button>
+  </div>
+
   <div *ngFor="let book of books$ | async | search:searchQuery" class="book-item">
-    <mat-card>
-      <mat-card-title>{{ book.title }}</mat-card-title>
-      <mat-card-subtitle>{{ book.author }} ({{ book.year }})</mat-card-subtitle>
-      <button mat-icon-button (click)="deleteBook(book.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
+    <mat-card class="flex m-8 p-8 gap-6">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title class="book-title" (click)="viewBookDetails(book)">{{ book.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.author }} ({{ book.year }})</mat-card-subtitle>
+          <img class="book-card-image" [alt]="book?.title || 'Default cover'"
+               mat-card-sm-image [ngSrc]="book.coverImageUrl || 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM='"
+               width="500" height="500"
+          >
+        </mat-card-title-group>
+      </mat-card-header>
+
+      <mat-card-content>
+          {{book.description}}
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button matTooltip="Delete this book" mat-icon-button (click)="deleteBook(book.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button matTooltip="Edit this book" mat-icon-button (click)="deleteBook(book.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
-  <button mat-raised-button color="primary" (click)="addNewBook()">Add Book</button>
 </div>
