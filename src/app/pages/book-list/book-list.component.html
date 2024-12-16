@@ -1,4 +1,4 @@
-<div class="book-list mb-8">
+<div class="book-list">
   <mat-toolbar class="pl-8" color="primary">Book List</mat-toolbar>
   <div class="mt-8 ml-8 flex gap-10 items-baseline">
     <mat-form-field>
@@ -8,11 +8,11 @@
     <button mat-raised-button color="primary" (click)="addNewBook()">Add Book</button>
   </div>
 
-  <div *ngFor="let book of books$ | async | search:searchQuery" class="book-item" @listAnimation>
-    <mat-card class="flex m-8 p-8 gap-6">
+  <div *ngFor="let book of books$ | async | search:searchQuery; trackBy: trackById" class="book-item" @listAnimation>
+    <mat-card (click)="viewBookDetails(book)" class="flex m-8 p-8 gap-6 cursor-pointer">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title class="book-title" (click)="viewBookDetails(book)">{{ book.title }}</mat-card-title>
+          <mat-card-title>{{ book.title }}</mat-card-title>
           <mat-card-subtitle>{{ book.author }} ({{ book.year }})</mat-card-subtitle>
           <img class="book-card-image" [alt]="book?.title || 'Default cover'"
                mat-card-sm-image [ngSrc]="book.coverImageUrl || 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM='"
@@ -26,10 +26,10 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button matTooltip="Delete this book" mat-icon-button (click)="deleteBook(book.id)">
+        <button matTooltip="Delete this book" mat-icon-button (click)="deleteBook($event, book.id)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button matTooltip="Edit this book" mat-icon-button (click)="deleteBook(book.id)">
+        <button matTooltip="Edit this book" mat-icon-button (click)="editBook($event, book)">
           <mat-icon>edit</mat-icon>
         </button>
       </mat-card-actions>

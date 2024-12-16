@@ -21,9 +21,13 @@ export class BookService {
   }
 
   updateBook(updatedBook: Book) {
+    console.log(updatedBook);
+
     this.books = this.books.map((book) =>
       book.id === updatedBook.id ? updatedBook : book
     );
+
+    console.log(this.books)
     this.booksSubject.next(this.books);
   }
 

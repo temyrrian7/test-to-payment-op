@@ -24,6 +24,7 @@ import { SearchPipe } from '../../pipes /search.pipe'
 import { MatTooltip } from '@angular/material/tooltip'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { animate, style, transition, trigger } from '@angular/animations'
+import { Book } from '../../models/book.model'
 
 @Component({
   selector: 'app-book-list',
@@ -82,11 +83,21 @@ export class BookListComponent {
     this.dialog.open(BookFormComponent, { width: '400px' });
   }
 
-  viewBookDetails(book: any) {
+  editBook($event: MouseEvent, book: Book) {
+    $event.stopPropagation();
+    this.dialog.open(BookFormComponent, {data: book, width: '400px' });
+  }
+
+  viewBookDetails(book: Book) {
     this.dialog.open(BookDetailsComponent, { data: book, width: '400px' })
   }
 
-  deleteBook(id: number) {
+  deleteBook($event: MouseEvent, id: number) {
+    $event.stopPropagation();
     this.bookService.deleteBook(id);
+  }
+
+  trackById(index: number, book: Book): number {
+    return book.id;
   }
 }

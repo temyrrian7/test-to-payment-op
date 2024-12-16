@@ -1,11 +1,21 @@
-<div class="book-details p-8">
-  <h2>{{ book.title }}</h2>
-  <p><strong>Author:</strong> {{ book.author }}</p>
-  <p><strong>Year:</strong> {{ book.year }}</p>
-  <p><strong>Description:</strong> {{ book.description }}</p>
-  <img *ngIf="book.coverImageUrl" [ngSrc]="book.coverImageUrl" alt="Book Cover" fill />
 
-  <div class="actions">
-    <button mat-raised-button color="primary" (click)="close()">Close</button>
-  </div>
-</div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title class="book-title">{{ book.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.author }} ({{ book.year }})</mat-card-subtitle>
+        <img class="book-card-image" [alt]="book?.title || 'Default cover'"
+             mat-card-sm-image [ngSrc]="book.coverImageUrl || 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM='"
+             width="500" height="500"
+        >
+      </mat-card-title-group>
+    </mat-card-header>
+
+    <mat-card-content>
+      {{book.description}}
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="close()">Close</button>
+    </mat-card-actions>
+  </mat-card>
