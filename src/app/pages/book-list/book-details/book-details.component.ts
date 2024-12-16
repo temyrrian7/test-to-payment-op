@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core'
 import { MatButton, MatIconButton } from '@angular/material/button'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 
-import { Book } from '../../../models/book.model'
+import type { Book } from '../../../models/book.model'
 import {
   MatCard,
   MatCardActions,
@@ -39,15 +39,7 @@ import { MatTooltip } from '@angular/material/tooltip'
 })
 export class BookDetailsComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public book: {
-      id: number;
-      title: string;
-      author: string;
-      year: number;
-      description: string;
-      coverImageUrl?: string;
-    }
-    ,
+    @Inject(MAT_DIALOG_DATA) public book: Book,
     private dialogRef: MatDialogRef<BookDetailsComponent>
   ) {}
 

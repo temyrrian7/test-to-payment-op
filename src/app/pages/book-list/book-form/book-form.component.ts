@@ -6,7 +6,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field'
 import { MatInput } from '@angular/material/input'
 import { MatButton } from '@angular/material/button'
 import { NgIf } from '@angular/common'
-import { BookForm } from '../../../models/book.model'
+import type { Book, BookForm } from '../../../models/book.model'
 
 @Component({
   selector: 'app-book-form',
@@ -18,20 +18,22 @@ import { BookForm } from '../../../models/book.model'
 export class BookFormComponent implements OnInit {
   bookForm: FormGroup
 
-  constructor(private fb: NonNullableFormBuilder, private bookService: BookService, private dialogRef: MatDialogRef<BookFormComponent>, @Inject(MAT_DIALOG_DATA) public book: {
-    id: number; title: string; author: string; year: number; description: string; coverImageUrl?: string;
-  }) {
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private bookService: BookService,
+    private dialogRef: MatDialogRef<BookFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public book: Book
+  ) {}
+
+  ngOnInit() {
     this.bookForm = this.fb.group<BookForm>({
       title: this.fb.control('', Validators.required),
-      author:  this.fb.control('', Validators.required),
+      author: this.fb.control('', Validators.required),
       year: this.fb.control(0, Validators.required),
       description: this.fb.control('', Validators.required),
       coverImageUrl: this.fb.control('')
-    })
-  }
+    });
 
-  ngOnInit() {
-    console.log(this.book)
     if (this.book) {
       this.bookForm.patchValue(this.book)
     }
